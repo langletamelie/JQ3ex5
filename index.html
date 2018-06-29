@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="style.css">
+  <title>Exercice5</title>
+</head>
+<body>
+  <form>
+    <label for="text"></label><input type="text" name="text" id="text" />
+  </form>
+  <div id="square"></div>
+  <script src="jquery-3.2.1.js"></script>
+  <script>
+  $('input').keydown(function(e){
+    //déclaration des variables utiles pour le déplacement du carré
+    var addValue;
+    var posMax;
+    var direction;
+
+    if(e.which == 37){//gauche
+      addValue = -10;
+      posMax = $(document).width();
+      direction = 'left';
+    }else if (e.which == 38){//haut
+      addValue = 10;
+      posMax = $(document).height();
+      direction = 'top';
+    }else if (e.which == 39){//droite
+      addValue = 10;
+      posMax = $(document).width();
+      direction = 'left';
+    }else if (e.which == 40){//bas
+      addValue = -10;
+      posMax = $(document).height();
+      direction = 'top';
+    }else{
+    }
+    //calcul de la postion
+    posMax = parseInt(posMax);
+    var newPos = parseInt($('#square').css(direction)) + addValue;
+    //une fois arrivé au maximum de la page
+    if (addValue > 0){
+      newPos = (newPos + 50 > posMax)? 0 : newPos;
+    } else {
+      newPos = (newPos -25 < -25)? posMax -50 : newPos;
+    }
+    //assignation de la position
+    $('#square').css(direction, newPos + 'px');
+  });
+  </script>
+</body>
+</html>
